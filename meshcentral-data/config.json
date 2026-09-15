@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Ylianst/MeshCentral/master/meshcentral-config-schema.json",
+  "settings": {
+    "cert": "localhost",
+    "port": 4433,
+    "redirPort": 8080,
+    "sessionKey": "MyLocalMeshCentralSecretKey2026!",
+    "allowFraming": false,
+    "siteStyle": 3
+  },
+  "domains": {
+    "": {
+      "title": "당근서비스 디바이스 관리 콘솔",
+      "title2": "",
+      "siteStyle": 3,
+      "minify": true,
+      "newAccounts": true,
+      "userNameIsEmail": false,
+      "language": "ko"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -56,14 +56,15 @@
     </style>
 </head>
 <body id="body" onload="if (typeof(startup) !== 'undefined') startup();" class="arg_hide login">
-    <div id="backgroundImage" style="position:absolute;left:0;bottom:0;z-index:-1;height:60%;width:100%;opacity:0.1;background-image:url('welcome.png');background-repeat:no-repeat;background-position:left bottom;background-size:contain"></div>
     <table id="centralTable" class="container" style="height:100%;z-index:1">
         <tr>
             <td id="logincell">
-                {{{titlehtml}}}
-                <img id="loginPicture" />
-                <div style="font-size:46px;font-family:Arial,Helvetica,sans-serif;font-weight:bold;padding-bottom:10px;color:#c8c8c8;text-shadow: 2px 2px 2px #000;">{{{title1}}}<sup style="font-size:20px"> {{{title2}}}</sup></div>
-                <div id=loginpanel style="display:none;box-shadow:1px 1px 4px #000">
+                <div id=loginpanel style="display:none">
+                    <div style="text-align:center;margin-bottom:20px">
+                        <img src="images/daangn_logo.png" style="height:44px;max-width:240px;object-fit:contain" alt="당근서비스" />
+                    </div>
+                    <div style="font-size:20px;font-weight:800;color:#191F28;text-align:center;margin-bottom:6px;letter-spacing:-0.3px">당근서비스 디바이스 관리 콘솔</div>
+                    <div style="font-size:14px;color:#4E5968;text-align:center;margin-bottom:28px">당근서비스 구성원 전용 서비스입니다.</div>
                     <form id=loginpanelform method=post>
                         <input type=hidden name=action value=login />
                         <div id=message1></div>
@@ -71,22 +72,22 @@
                             <table style="width:100%">
                                 <tr>
                                     <td>
-                                        <input id=username title="Username" style="box-sizing:border-box;width:280px;border:0;border-radius:4px;padding:8px;background-color:#FFF8CC" {{{autocomplete}}}="username" placeholder="Username" type=text maxlength=64 name=username required onchange=validateLogin(1) onkeyup=validateLogin(1,event) />
+                                        <input id=username title="Username" {{{autocomplete}}}="username" placeholder="아이디 (사용자명)" type=text maxlength=64 name=username required onchange=validateLogin(1) onkeyup=validateLogin(1,event) />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input id=password title="Password" style="box-sizing:border-box;width:280px;border:0;border-radius:4px;padding:8px;background-color:#FFF8CC" {{{autocomplete}}}="current-password" placeholder="Password" type=password maxlength=256 name=password required onchange=validateLogin(2) onkeyup=validateLogin(2,event) />
+                                        <input id=password title="Password" {{{autocomplete}}}="current-password" placeholder="비밀번호" type=password maxlength=256 name=password required onchange=validateLogin(2) onkeyup=validateLogin(2,event) />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div id=showPassHintLink title="Password Hint" style="box-sizing:border-box;width:280px;border:0;border-radius:4px;padding:8px;background-color:#FFF8CC;display:none"><a onclick="return showPassHint(event);" href="#" style="cursor:pointer">Show Hint</a></div>
+                                        <div id=showPassHintLink title="Password Hint" style="display:none"><a onclick="return showPassHint(event);" href="#" style="cursor:pointer">Show Hint</a></div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input id=loginButton style="box-sizing:border-box;width:280px;border:0;border-radius:4px;padding:6px" onclick="submitButtonClicked('loginpanelform')" type=button value="Log In" />
+                                        <input id=loginButton onclick="submitButtonClicked('loginpanelform')" type=button value="로그인" />
                                     </td>
                                 </tr>
                                 <tr id="topLanguageSelectRow" style="display:none"><td id="topLanguageSelect"></td></tr>

@@ -9,7 +9,9 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="noindex,nofollow">
     <link rel="manifest" href="{{{domainurl}}}manifest.json">
-    <link type="image/x-icon" href="{{{domainurl}}}favicon.ico" rel="shortcut icon" />
+    <link rel="icon" type="image/png" href="karrot-favicon.png?v=ratio2026" />
+    <link rel="shortcut icon" type="image/png" href="karrot-favicon.png?v=ratio2026" />
+    <link rel="apple-touch-icon" href="karrot-favicon.png?v=ratio2026" />
     <link keeplink=1 type="text/css" href="styles/style-bootstrap.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/ol.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/ol3-contextmenu.min.css" media="screen" rel="stylesheet" title="CSS" />
@@ -19,7 +21,6 @@
     <link href="styles/select2.min.css" rel="stylesheet" title="CSS">
     <link href="styles/select2-bootstrap-5-theme.min.css" rel="stylesheet" title="CSS">
     {{{customCSSTags}}}
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
     <script type="text/javascript" src="scripts/common-0.0.1{{{min}}}.js"></script>
     <script type="text/javascript" src="scripts/meshcentral{{{min}}}.js"></script>
     <script type="text/javascript" src="scripts/amt-0.2.0{{{min}}}.js"></script>
@@ -240,12 +241,8 @@
     <div id=container>
         <div id="notifiyBox" class="notifiyBox" style="display:none"></div>
         <div id="masthead" class="noselect masthead-container">
-            <div class="masthead-left">
-                <div class="masthead-title" onclick="go(1,event)">{{{titlehtml}}}</div>
-                <div class="masthead-titles-container">
-                    <div class="title" onclick="go(1,event)">{{{title1}}}</div>
-                    <div class="title2" onclick="go(1,event)">{{{title2}}}</div>
-                </div>
+            <div class="masthead-left" onclick="go(1,event)" style="cursor:pointer; display:flex; align-items:center;">
+                <img src="images/daangn_logo.png" alt="당근서비스" style="height:32px; width:auto; object-fit:contain;" />
             </div>
 
             <div class="masthead-right">
@@ -340,7 +337,7 @@
                                     <span>Personal Notes</span>
                                 </div>
 
-                                <div class="userDropdownMenuItem" data-action="account" onclick="handleUserMenuItem('account')">
+                                <div class="userDropdownMenuItem" style="display:none !important;" data-action="account" onclick="handleUserMenuItem('account')">
                                     <i class="fa fa-user userDropdownMenuIcon"></i>
                                     <span>My Account</span>
                                 </div>
@@ -359,14 +356,14 @@
             </div>
         </div>
         <div class="sidebar flex-column" id="page_leftbar">
-            <div style="height:24px"></div>
+            <div style="height:12px"></div>
             <nav class="nav flex-column">
-                <a class="nav-link active text-center text-white lbbuttonsel" id="LeftMenuMyDevices" href="#" data-target="general" onclick=go(1,event) onkeypress="if (event.key=='Enter') { go(1); }"><i class="fa-solid fa-computer me-2"></i></a>
-                <a class="nav-link text-center text-white" id="LeftMenuMyAccount" href="#" data-target="account" onclick=go(2,event) onkeypress="if (event.key=='Enter') { go(2); }"><i class="fa-solid fa-user-gear me-2"></i></a>
-                <a class="nav-link text-center text-white" id="LeftMenuMyEvents" href="#" data-target="events" onclick=go(3,event) onkeypress="if (event.key=='Enter') { go(3); }"><i class="fa-solid fa-calendar-alt me-2"></i></a>
-                <a class="nav-link text-center text-white" id="LeftMenuMyFiles" href="#" data-target="files" onclick=go(5,event) onkeypress="if (event.key=='Enter') { go(5); }"><i class="fa-solid fa-folder-open me-2"></i></a>
-                <a class="nav-link text-center text-white" id="LeftMenuMyUsers" href="#" data-target="users" onclick=go(4,event) onkeypress="if (event.key=='Enter') { go(4); }"><i class="fa-solid fa-users me-2"></i></a>
-                <a class="nav-link text-center text-white" id="LeftMenuMyServer" href="#" data-target="server" onclick=go(6,event) onkeypress="if (event.key=='Enter') { go(6); }"><i class="fa-solid fa-server me-2"></i></a>
+                <a class="nav-link active lbbuttonsel" id="LeftMenuMyDevices" href="#" data-target="general" onclick=go(1,event) onkeypress="if (event.key=='Enter') { go(1); }"><i class="fa-solid fa-computer"></i><span>내 디바이스</span></a>
+                <a class="nav-link" id="LeftMenuMyAccount" style="display:none !important;" href="#" data-target="account" onclick=go(2,event) onkeypress="if (event.key=='Enter') { go(2); }"><i class="fa-solid fa-user-gear"></i><span>계정 설정</span></a>
+                <a class="nav-link" id="LeftMenuMyEvents" href="#" data-target="events" onclick=go(3,event) onkeypress="if (event.key=='Enter') { go(3); }"><i class="fa-solid fa-calendar-alt"></i><span>이벤트 로그</span></a>
+                <a class="nav-link" id="LeftMenuMyFiles" href="#" data-target="files" onclick=go(5,event) onkeypress="if (event.key=='Enter') { go(5); }"><i class="fa-solid fa-folder-open"></i><span>파일 관리</span></a>
+                <a class="nav-link" id="LeftMenuMyUsers" href="#" data-target="users" onclick=go(4,event) onkeypress="if (event.key=='Enter') { go(4); }"><i class="fa-solid fa-users"></i><span>사용자 관리</span></a>
+                <a class="nav-link" id="LeftMenuMyServer" href="#" data-target="server" onclick=go(6,event) onkeypress="if (event.key=='Enter') { go(6); }"><i class="fa-solid fa-server"></i><span>서버 설정</span></a>
             </nav>
         </div>
         <div id=topbar class=noselect>
@@ -376,17 +373,17 @@
                     <table id=MainMenuSpan cellpadding=0 cellspacing=0 class=style1>
                         <tr>
                             <td tabindex=0 id=MainMenuMyDevices class="topbar_td style3x" onmouseup=go(1,event)
-                                onkeypress="if (event.key == 'Enter') go(1)">My Devices</td>
-                            <td tabindex=0 id=MainMenuMyAccount class="topbar_td style3x" onmouseup=go(2,event)
-                                onkeypress="if (event.key == 'Enter') go(2)">My Account</td>
+                                onkeypress="if (event.key == 'Enter') go(1)">내 디바이스</td>
+                            <td tabindex=0 id=MainMenuMyAccount style="display:none !important;" class="topbar_td style3x" onmouseup=go(2,event)
+                                onkeypress="if (event.key == 'Enter') go(2)">내 계정</td>
                             <td tabindex=0 id=MainMenuMyEvents class="topbar_td style3x" onmouseup=go(3,event)
-                                onkeypress="if (event.key == 'Enter') go(3)">My Events</td>
+                                onkeypress="if (event.key == 'Enter') go(3)">이벤트 로그</td>
                             <td tabindex=0 id=MainMenuMyFiles class="topbar_td style3x" onmouseup=go(5,event)
-                                onkeypress="if (event.key == 'Enter') go(5)">My Files</td>
+                                onkeypress="if (event.key == 'Enter') go(5)">내 파일</td>
                             <td tabindex=0 id=MainMenuMyUsers class="topbar_td style3x" onmouseup=go(4,event)
-                                onkeypress="if (event.key == 'Enter') go(4)">My Users</td>
+                                onkeypress="if (event.key == 'Enter') go(4)">사용자 관리</td>
                             <td tabindex=0 id=MainMenuMyServer class="topbar_td style3x" onmouseup=go(6,event)
-                                onkeypress="if (event.key == 'Enter') go(6)">My Server</td>
+                                onkeypress="if (event.key == 'Enter') go(6)">서버 설정</td>
                             <td class="topbar_td_end style3">&nbsp;</td>
                         </tr>
                     </table>
@@ -397,27 +394,27 @@
                                 <table id=MainSubMenu cellpadding=0 cellspacing=0 class=style1>
                                     <tr>
                                         <td tabindex=0 id=MainDev class="topbar_td style3x" onmouseup=go(10,event)
-                                            onkeypress="if (event.key == 'Enter') go(10)">General</td>
+                                            onkeypress="if (event.key == 'Enter') go(10)">기본 정보</td>
                                         <td tabindex=0 id=MainDevDesktop class="topbar_td style3x" onmouseup=go(11,event)
-                                            onkeypress="if (event.key == 'Enter') go(11)">Desktop</td>
+                                            onkeypress="if (event.key == 'Enter') go(11)">원격 데스크톱</td>
                                         <td tabindex=0 id=MainDevTerminal class="topbar_td style3x" onmouseup=go(12,event)
-                                            onkeypress="if (event.key == 'Enter') go(12)">Terminal</td>
+                                            onkeypress="if (event.key == 'Enter') go(12)">터미널</td>
                                         <td tabindex=0 id=MainDevFiles class="topbar_td style3x" onmouseup=go(13,event)
-                                            onkeypress="if (event.key == 'Enter') go(13)">Files</td>
+                                            onkeypress="if (event.key == 'Enter') go(13)">내 파일</td>
                                         <td tabindex=0 id=MainDevRegistry class="topbar_td style3x" onmouseup=go(9,event)
-                                            onkeypress="if (event.key == 'Enter') go(9)">Registry</td>
+                                            onkeypress="if (event.key == 'Enter') go(9)">레지스트리</td>
                                         <td tabindex=0 id=MainDevApps class="topbar_td style3x" onmouseup=go(18,event)
-                                            onkeypress="if (event.key == 'Enter') go(18)">Software</td>
+                                            onkeypress="if (event.key == 'Enter') go(18)">소프트웨어</td>
                                         <td tabindex=0 id=MainDevEvents class="topbar_td style3x" onmouseup=go(16,event)
-                                            onkeypress="if (event.key == 'Enter') go(16)">Events</td>
+                                            onkeypress="if (event.key == 'Enter') go(16)">이벤트</td>
                                         <td tabindex=0 id=MainDevInfo class="topbar_td style3x" onmouseup=go(17,event)
-                                            onkeypress="if (event.key == 'Enter') go(17)">Details</td>
+                                            onkeypress="if (event.key == 'Enter') go(17)">상세 정보</td>
                                         <td tabindex=0 id=MainDevAmt class="topbar_td style3x" onmouseup=go(14,event)
                                             onkeypress="if (event.key == 'Enter') go(14)">Intel&reg;AMT</td>
                                         <td tabindex=0 id=MainDevConsole class="topbar_td style3x" onmouseup=go(15,event)
-                                            onkeypress="if (event.key == 'Enter') go(15)">Console</td>
+                                            onkeypress="if (event.key == 'Enter') go(15)">콘솔</td>
                                         <td tabindex=0 id=MainDevPlugins class="topbar_td style3x" onmouseup=go(19,event)
-                                            onkeypress="if (event.key == 'Enter') go(19)">Plugins</td>
+                                            onkeypress="if (event.key == 'Enter') go(19)">플러그인</td>
                                         <td class="topbar_td_end style3">&nbsp;</td>
                                     </tr>
                                 </table>
@@ -498,7 +495,7 @@
             </div>
             <div id=p1 style="display:none">
                 <div id="p1title" class="d-flex justify-content-between align-items-center">
-                    <div class="fs-4 fw-bold">My Devices</div>
+                    <div class="fs-4 fw-bold">내 디바이스</div>
                     <div style="display:none" id="devListToolbarViewIcons">
                         <div id=devViewPageState style="float:left;line-height:32px;height:32px;font-size:16px;display:none"></div>
                         <div tabindex=0 id=devViewPageButton1 class=viewSelector onclick=onDeviceViewPageChange(1)
@@ -559,28 +556,28 @@
                             <i class="fa-solid fa-chevron-up" data-fa-transform="up-6"></i>
                             <i class="fa-solid fa-chevron-down" data-fa-transform="down-6"></i>
                         </button>
-                        <input type=button class="btn btn-secondary me-1 btn-sm" id=SelectAllButton onclick="selectallButtonFunction();" value="Select All" />
-                        <input type=button class="btn btn-primary me-1 btn-sm" id=GroupActionButton disabled="disabled" value="Group Action" onclick=groupActionFunction() />
-                        <input type=button class="btn btn-secondary me-1 btn-sm" id=ScrollToTopButton onclick="onDevicesScroll(true);" value="Scroll To Top" />
-                        <input type="text" id=SearchInput class="form-control-sm me-1 btn-sm" placeholder="Filter" onchange=onDeviceSearchChanged(event) onclick=onDeviceSearchChanged(event) onkeyup=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="Filter devices by name or prefix: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:) - Prefix with ! to negate, e.g. !tag:abc">
+                        <input type=button class="btn btn-secondary me-1 btn-sm" id=SelectAllButton onclick="selectallButtonFunction();" value="전체 선택" />
+                        <input type=button class="btn btn-primary me-1 btn-sm" id=GroupActionButton disabled="disabled" value="그룹 작업" />
+                        <input type=button class="btn btn-secondary me-1 btn-sm" id=ScrollToTopButton onclick="onDevicesScroll(true);" value="맨 위로" />
+                        <input type="text" id=SearchInput class="form-control-sm me-1 btn-sm" placeholder="검색 필터" onchange=onDeviceSearchChanged(event) onclick=onDeviceSearchChanged(event) onkeyup=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="기기 이름 또는 접두사로 검색: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:)">
                         <span id=SearchInputClearButton style="display:none;position:relative">
                             <span class="fa-layers fa-fw" role="button" onclick="clearDeviceSearch()" style="position:absolute;left:-25px;top:-15px">
                                 <i class="fa-solid fa-circle" style="color:var(--bs-secondary-bg)"></i>
                                 <i class="fa-solid fa-xmark"  style="color:var(--bs-body-color)"></i>
                             </span>
                         </span>
-                        <select class="form-select-sm me-1" id=DevFilterSelect onchange=onOnlineCheckBox(event) title="Device Filter">
-                            <option value=0 selected>All</option>
-                            <option value=1>Online</option>
-                            <option value=5>Offline</option>
-                            <option value=2>Sessions</option>
-                            <option value=3>Starred</option>
+                        <select class="form-select-sm me-1" id=DevFilterSelect onchange=onOnlineCheckBox(event) title="기기 필터">
+                            <option value=0 selected>전체</option>
+                            <option value=1>온라인</option>
+                            <option value=5>오프라인</option>
+                            <option value=2>세션</option>
+                            <option value=3>즐겨찾기</option>
                             <option value=4>Intel&reg; AMT</option>
-                            <option value=6>Help</option>
-                            <option value=7>Tagged</option>
-                            <option value=8>Untagged</option>
+                            <option value=6>도움말</option>
+                            <option value=7>태그됨</option>
+                            <option value=8>태그 없음</option>
                         </select>
-                        <div class="form-check" title="Show devices operating system name"><input class="form-check-input me-1" type=checkbox id=RealNameCheckBox onclick=onRealNameCheckBox() /><label class="form-check-label" for="RealNameCheckBox">OS Name</label></div>
+                        <div class="form-check" title="운영체제 이름 보기"><input class="form-check-input me-1" type=checkbox id=RealNameCheckBox onclick=onRealNameCheckBox() /><label class="form-check-label" for="RealNameCheckBox">OS 이름</label></div>
                         <label style="display:none"><input type=checkbox id=OnlineCheckBox class="form-check-input me-2" onclick=onOnlineCheckBox(event) /><span title="Only show devices that are online">Online</span></label>
                         <span id="devsCustomUIBar"></span>
                     </div>
@@ -680,119 +677,119 @@
             </div>
             <div id=p2 style="display:none">
                 <div id="p2title" class="d-flex align-items-center">
-                    <div class="fs-4 fw-bold">My Account</div>
+                    <div class="fs-4 fw-bold">내 계정</div>
                 </div>
                 <div id="p2info" style="overflow-y:auto">
                     <div id="p2AccountImageFrame">
                         <img id="p2AccountImage" alt="" width="128" height="128"
                             onclick="account_manageImage(0)" src="images/user-256.png" />
-                        <div><a href=# onclick="account_manageImage(0)">Change image</a></div>
+                        <div><a href=# onclick="account_manageImage(0)">프로필 사진 변경</a></div>
                     </div>
                     <div id="p2AccountSecurity" style="display:none">
-                        <p><strong>Account security</strong></p>
+                        <p><strong>계정 보안 설정</strong></p>
                         <div style="margin-left:25px">
                             <div id="managePhoneNumber1">
                                 <div class="p2AccountActions"><span
                                         id="authPhoneNumberCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_managePhone()">Manage phone number</a><br /></span>
+                                        onclick="return account_managePhone()">전화번호 관리</a><br /></span>
                             </div>
                             <div id="manageEmail2FA">
                                 <div class="p2AccountActions"><span
                                         id="authEmailSetupCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageAuthEmail()">Manage email authentication</a><br /></span>
+                                        onclick="return account_manageAuthEmail()">이메일 인증 관리</a><br /></span>
                             </div>
                             <div id="manageAuthApp">
                                 <div class="p2AccountActions"><span
                                         id="authAppSetupCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageAuthApp()">Manage authenticator app</a><br /></span>
+                                        onclick="return account_manageAuthApp()">OTP 인증 앱 관리</a><br /></span>
                             </div>
                              <div id="manageDuoApp">
                                 <div class="p2AccountActions"><span
                                         id="authDuoSetupCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageAuthDuo()">Manage Duo authentication</a><br /></span>
+                                        onclick="return account_manageAuthDuo()">Duo 인증 관리</a><br /></span>
                             </div>
                             <div id="manageHardwareOtp">
                                 <div class="p2AccountActions"><span
                                         id="authKeySetupCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageHardwareOtp(0)">Manage security keys</a><br /></span>
+                                        onclick="return account_manageHardwareOtp(0)">보안 키 관리</a><br /></span>
                             </div>
                             <div id="managePushAuthDev">
                                 <div class="p2AccountActions"><span
                                         id="authPushAuthDevCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_managePushAuthDev()">Manage push authentication</a><br /></span>
+                                        onclick="return account_managePushAuthDev()">푸시 인증 디바이스 관리</a><br /></span>
                             </div>
                             <div id="manageMessaging1">
                                 <div class="p2AccountActions"><span
                                         id="authMessagingCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageMessaging()">Manage messaging</a><br /></span>
+                                        onclick="return account_manageMessaging()">메시징 관리</a><br /></span>
                             </div>
                             <div id="manageOtp">
                                 <div class="p2AccountActions"><span
                                         id="authCodesSetupCheck"><strong>&#x2713;</strong></span></div><span><a href=#
-                                        onclick="return account_manageOtp(0)">Manage backup codes</a><br /></span>
+                                        onclick="return account_manageOtp(0)">백업 코드 관리</a><br /></span>
                             </div>
                             <div class="p2AccountActions"></div><span><a href=#
-                                    onclick="return account_viewPreviousLogins()">View previous logins</a><br /></span>
+                                    onclick="return account_viewPreviousLogins()">로그인 이력 보기</a><br /></span>
                         </div>
                     </div>
                     <div id="p2AccountActions">
-                        <p><strong>Account actions</strong></p>
+                        <p><strong>계정 설정 항목</strong></p>
                         <p class="mL">
-                            <span id="managePhoneNumber2" style="display:none"><a href=# onclick="return account_managePhone()">Manage phone number</a><br /></span>
-                            <span id="manageMessaging2" style="display:none"><a href=# onclick="return account_manageMessaging()">Manage messaging</a><br /></span>
-                            <span id="verifyEmailId" style="display:none"><a href=# onclick="return account_showVerifyEmail()">Verify email</a><br /></span>
-                            <span id="accountEnableNotificationsSpan" style="display:none"><a href=# onclick="return account_enableNotifications()">Enable web notifications</a><br /></span>
-                            <a href=# onclick="return account_showLocalizationSettings()">Localization Settings</a><br />
-                            <a href=# onclick="return account_showAccountNotifySettings()">Notification Settings</a><br />
+                            <span id="managePhoneNumber2" style="display:none"><a href=# onclick="return account_managePhone()">전화번호 관리</a><br /></span>
+                            <span id="manageMessaging2" style="display:none"><a href=# onclick="return account_manageMessaging()">메시징 관리</a><br /></span>
+                            <span id="verifyEmailId" style="display:none"><a href=# onclick="return account_showVerifyEmail()">이메일 인증</a><br /></span>
+                            <span id="accountEnableNotificationsSpan" style="display:none"><a href=# onclick="return account_enableNotifications()">웹 알림 활성화</a><br /></span>
+                            <a href=# onclick="return account_showLocalizationSettings()">언어 및 지역 설정</a><br />
+                            <a href=# onclick="return account_showAccountNotifySettings()">알림 상세 설정</a><br />
                             <span id="p2AccountPassActions">
-                                <span id="accountChangeEmailAddressSpan" style="display:none"><a href=# onclick="return account_showChangeEmail()">Change email address</a><br /></span>
-                                <a href=# onclick="return account_showChangePassword()">Change password</a><span id="p2nextPasswordUpdateTime"></span><br />
-                                <a href=# onclick="return account_showDeleteAccount()">Delete account</a><br />
+                                <span id="accountChangeEmailAddressSpan" style="display:none"><a href=# onclick="return account_showChangeEmail()">이메일 주소 변경</a><br /></span>
+                                <a href=# onclick="return account_showChangePassword()">비밀번호 변경</a><span id="p2nextPasswordUpdateTime"></span><br />
+                                <a href=# onclick="return account_showDeleteAccount()">계정 삭제</a><br />
                             </span>
-                            <span id="accountCreateLoginTokenSpan" style="display:none"><a href=# onclick="return account_createLoginToken()">Create login token</a><br /></span>
-                            <a href=# onclick="return account_showThemesSwitcher()">Switch theme</a><br />
-                            <span id="accountCustomIconsSpan" style="display:none"><a href=# onclick="return showIconCustomization()">Icons Customization</a><br /></span>
+                            <span id="accountCreateLoginTokenSpan" style="display:none"><a href=# onclick="return account_createLoginToken()">로그인 토큰 생성</a><br /></span>
+                            <a href=# onclick="return account_showThemesSwitcher()">테마 변경</a><br />
+                            <span id="accountCustomIconsSpan" style="display:none"><a href=# onclick="return showIconCustomization()">아이콘 맞춤 설정</a><br /></span>
                         </p>
                     </div>
                     <div id=p2logintokens></div>
-                    <strong>Device Groups</strong>
-                    <span id="p2createMeshLink1"> - <button class="btn btn-primary btn-sm" onclick="return account_createMesh()"><i class="fa-fw fa-solid fa-circle-plus"></i> New</button></span>
+                    <strong>디바이스 그룹</strong>
+                    <span id="p2createMeshLink1"> - <button class="btn btn-primary btn-sm" onclick="return account_createMesh()"><i class="fa-fw fa-solid fa-circle-plus"></i> 새 그룹 생성</button></span>
                     <br /><br />
                     <div id=p2meshes></div>
-                    <div id=p2noMeshFound style="display:none">No device groups.<span id="p2createMeshLink2"> <a href=# onclick="return account_createMesh()"><strong>Get started here!</strong></a></span>
+                    <div id=p2noMeshFound style="display:none">등록된 디바이스 그룹이 없습니다.<span id="p2createMeshLink2"> <a href=# onclick="return account_createMesh()"><strong>여기서 시작하세요!</strong></a></span>
                     </div>
                     <br style=clear:both />
                 </div>
             </div>
             <div id=p3 style="display:none">
                 <div id="p3title" class="d-flex align-items-center">
-                    <div class="fs-4 fw-bold">My Events</div>
+                    <div class="fs-4 fw-bold">이벤트 로그</div>
                 </div>
                 <table class="pTable">
                     <tr>
                         <td class="auto-style1 d-flex justify-content-end p-1">
                             <div class="d-flex align-items-center">
-                                <label for="p3filterevents" class="me-1">Filter</label>
+                                <label for="p3filterevents" class="me-1">필터</label>
                                 <select id=p3filterevents class="form-select-sm me-2" onchange=refreshEvents()>
-                                    <option notransval=1 value="">All Logs</option>
-                                    <option notransval=1 value=agentlog>Agent Logs</option>
-                                    <option notransval=1 value=relaylog>Relay Logs</option>
-                                    <option notransval=1 value=manual>Manual Logs</option>
-                                    <option notransval=1 value=runcommands>Run Command Logs</option>
-                                    <option notransval=1 value=batchupload>Batch Upload Logs</option>
-                                    <option notransval=1 value=changenode>Change Node Logs</option>
-                                    <option notransval=1 value=removenode>Remove Node Logs</option>
+                                    <option notransval=1 value="">전체 로그</option>
+                                    <option notransval=1 value=agentlog>에이전트 로그</option>
+                                    <option notransval=1 value=relaylog>릴레이 로그</option>
+                                    <option notransval=1 value=manual>수동 로그</option>
+                                    <option notransval=1 value=runcommands>명령어 실행 로그</option>
+                                    <option notransval=1 value=batchupload>배치 업로드 로그</option>
+                                    <option notransval=1 value=changenode>노드 변경 로그</option>
+                                    <option notransval=1 value=removenode>노드 삭제 로그</option>
                                 </select>
-                                <label for="p3limitdropdown" class="me-1">Show</label>
+                                <label for="p3limitdropdown" class="me-1">표시 개수</label>
                                 <select id=p3limitdropdown class="form-select-sm me-2" onchange=refreshEvents()>
-                                    <option notransval=1 value=60>Last 60</option>
-                                    <option notransval=1 value=120>Last 120</option>
-                                    <option notransval=1 value=250>Last 250</option>
-                                    <option notransval=1 value=500>Last 500</option>
-                                    <option notransval=1 value=1000>Last 1000</option>
-                                    <option notransval=1 value="">No limit</option>
+                                    <option notransval=1 value=60>최근 60개</option>
+                                    <option notransval=1 value=120>최근 120개</option>
+                                    <option notransval=1 value=250>최근 250개</option>
+                                    <option notransval=1 value=500>최근 500개</option>
+                                    <option notransval=1 value=1000>최근 1000개</option>
+                                    <option notransval=1 value="">제한 없음</option>
                                 </select>
-                                <a href=# onclick=p3showDownloadEventsDialog(2)><i class="fa-solid fa-download" title="Download Events"></i></a>
+                                <a href=# onclick=p3showDownloadEventsDialog(2)><i class="fa-solid fa-download" title="이벤트 로그 다운로드"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -801,33 +798,33 @@
             </div>
             <div id=p4 style="display:none">
                 <div id="p4title" class="d-flex align-items-center">
-                    <div class="fs-4 fw-bold">My Users</div>
+                    <div class="fs-4 fw-bold">사용자 관리</div>
                 </div>
                 <table class="pTable">
                     <tr>
                         <td id="p4toolbarActions" class="style14 d-flex align-items-center flex-wrap p-1">
                             <div  class="d-flex align-items-center">
-                                <input type=button id=UsersSelectAllButton class="btn btn-secondary btn-sm me-1" onclick="p3usersSelectallButtonFunction()" value="Select All" />
-                                <input type=button id=UsersGroupActionButton class="btn btn-primary btn-sm me-1" disabled="disabled" value="Group Action" onclick=p3usersGroupActionFunction() />
-                                <input id=UserNewAccountButton class="btn btn-success btn-sm me-1" type=button onclick=showCreateNewAccountDialog() value="New Account..." />
+                                <input type=button id=UsersSelectAllButton class="btn btn-secondary btn-sm me-1" onclick="p3usersSelectallButtonFunction()" value="전체 선택" />
+                                <input type=button id=UsersGroupActionButton class="btn btn-primary btn-sm me-1" disabled="disabled" value="그룹 작업" onclick=p3usersGroupActionFunction() />
+                                <input id=UserNewAccountButton class="btn btn-success btn-sm me-1" type=button onclick=showCreateNewAccountDialog() value="새 계정..." />
                                 <div class="btn-group me-1 mobileActionDropdown">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More&nbsp;<i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">더보기&nbsp;<i class="fa-solid fa-chevron-down fa-xs"></i></button>
                                     <div class="dropdown-menu">
-                                        <button type="button" class="dropdown-item" onclick="showUserBroadcastDialog()">Broadcast</button>
-                                        <button type="button" class="dropdown-item" onclick="p4downloadUserInfo()">Download user information</button>
-                                        <button type="button" id=p4MobileUserBatchCreate class="dropdown-item" style="display:none" onclick="p4batchAccountCreate()">Batch create accounts</button>
-                                        <button type="button" class="dropdown-item" onclick="onUsersViewSettings()">Settings</button>
+                                        <button type="button" class="dropdown-item" onclick="showUserBroadcastDialog()">공지 방송</button>
+                                        <button type="button" class="dropdown-item" onclick="p4downloadUserInfo()">사용자 정보 다운로드</button>
+                                        <button type="button" id=p4MobileUserBatchCreate class="dropdown-item" style="display:none" onclick="p4batchAccountCreate()">일괄 계정 생성</button>
+                                        <button type="button" class="dropdown-item" onclick="onUsersViewSettings()">설정</button>
                                     </div>
                                 </div>
                                 <div class="d-inline-flex align-items-center">
-                                    <input id=UserSearchInput type=search class="form-control-sm me-1" placeholder=Filter onchange=onUserSearchInputChanged() onkeyup=onUserSearchInputChanged() autocomplete=off onfocus=onUserSearchFocus(1) onblur=onUserSearchFocus(0) />
+                                    <input id=UserSearchInput type=search class="form-control-sm me-1" placeholder=검색필터 onchange=onUserSearchInputChanged() onkeyup=onUserSearchInputChanged() autocomplete=off onfocus=onUserSearchFocus(1) onblur=onUserSearchFocus(0) />
                                 </div>
                             </div>
                             <div class="d-flex align-items-center ms-auto desktopAction">
-                                <input type=button class="btn btn-primary btn-sm me-2"onclick=showUserBroadcastDialog() style=margin-right:6px value="Broadcast" />
-                                <a href=# onclick=p4downloadUserInfo()><i role=button class="fa-solid fa-download me-2" title="Download user information"></i></a>
-                                <a href=# onclick=p4batchAccountCreate()><i role=button id=p4UserBatchCreate style="display:none" title="Batch create many user accounts" class="fa-solid fa-upload me-1"></i></a>
-                                <i style="cursor:pointer;margin-top:3px;margin-left:6px" id=usersListToolbarSettings class="fa-solid fa-cog" title="Settings" onclick="onUsersViewSettings()"></i>
+                                <input type=button class="btn btn-primary btn-sm me-2"onclick=showUserBroadcastDialog() style=margin-right:6px value="공지 방송" />
+                                <a href=# onclick=p4downloadUserInfo()><i role=button class="fa-solid fa-download me-2" title="사용자 정보 다운로드"></i></a>
+                                <a href=# onclick=p4batchAccountCreate()><i role=button id=p4UserBatchCreate style="display:none" title="일괄 계정 생성" class="fa-solid fa-upload me-1"></i></a>
+                                <i style="cursor:pointer;margin-top:3px;margin-left:6px" id=usersListToolbarSettings class="fa-solid fa-cog" title="설정" onclick="onUsersViewSettings()"></i>
                             </div>
                         </td>
                     </tr>
@@ -836,7 +833,7 @@
             </div>
             <div id=p5 style="display:none">
                 <div id="p5title" class="d-flex align-items-center">
-                    <div class="fs-4 fw-bold">My Files</div>
+                    <div class="fs-4 fw-bold">내 파일</div>
                 </div>
                 <table id="p5toolbar" class="table" cellpadding="0" cellspacing="0">
                     <tr>
@@ -1695,22 +1692,11 @@
                 </div>
                 <div id=p17info class="ps-0 pb-5 overflow-y-auto container-fluid">
                     <div id=p17graph style="width:100%">
-                        <table style=width:100%>
-                            <tr>
-                                <td style=width:64px;vertical-align:top>
-                                    <img src=images/details/graph64.png border=0 width=64 />
-                                </td>
-                                <td>
-                                    <div class=DevSt style=margin-bottom:3px;margin-left:16px><b>Live Graph</b></div>
-                                    <div
-                                        style="margin-bottom:10px;margin-left:16px;height:240px;width:calc(100% - 16px);position:relative">
-                                        <canvas id=deviceDetailsStats style="position:absolute;top:0;left:0;right:0;bottom:0"></canvas>
-                                    </div>
-                                    <div id="extraGraphValues" style="display:none;margin-left:30px;margin-bottom:15px">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class=DevSt style="font-size:16px;font-weight:700;margin-top:16px;margin-bottom:8px;color:var(--text-1);border-bottom:1px solid var(--border);padding-bottom:6px"><b>Live Graph</b></div>
+                        <div style="margin-bottom:16px;height:240px;width:100%;position:relative">
+                            <canvas id=deviceDetailsStats style="position:absolute;top:0;left:0;right:0;bottom:0"></canvas>
+                        </div>
+                        <div id="extraGraphValues" style="display:none;margin-bottom:15px"></div>
                     </div>
                     <div id=p17info2></div>
                 </div>
@@ -3101,23 +3087,17 @@
         }
 
         function toggleNightMode() {
-            if (xxdialogMode) return;
             var cNightMode = getstore('nightMode', '0');
-            var x = '<input type=radio id=night0 name=nightmoderadio value=0 ' + ((cNightMode == 0) ? 'checked' : '') + '><label for=night0>' + "Browser default" + '</label><br>';
-            x += '<input type=radio id=night2 name=nightmoderadio value=2 ' + ((cNightMode == 2) ? 'checked' : '') + '><label for=night2>' + "Light mode" + '</label><br>';
-            x += '<input type=radio id=night1 name=nightmoderadio value=1 ' + ((cNightMode == 1) ? 'checked' : '') + '><label for=night1>' + "Dark mode" + '</label><br>';
-            xxdialogButtons = 3;
-            setModalContent('xxAddAgent', "Night Mode", x);
-            showModal('xxAddAgentModal', 'idx_dlgOkButton', toggleNightModeEx);
-
-            QV('uiMenu', false);
+            var isNight = (cNightMode == '1') || (cNightMode == '0' && document.body.classList.contains('night'));
+            var newMode = isNight ? '2' : '1';
+            putstore('nightMode', newMode);
+            setNightMode();
         }
 
         function toggleNightModeEx() {
-            // Save new night mode
             var nNightMode = '0';
-            if (Q('night1').checked) { nNightMode = '1'; }
-            if (Q('night2').checked) { nNightMode = '2'; }
+            if (Q('night1') && Q('night1').checked) { nNightMode = '1'; }
+            if (Q('night2') && Q('night2').checked) { nNightMode = '2'; }
             putstore('nightMode', nNightMode);
             setNightMode();
         }
@@ -3125,22 +3105,20 @@
         if (window.matchMedia) { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setNightMode); }
 
         function setNightMode() {
-            // Set night mode
-            var nNightMode = getstore('nightMode', '0')
-            nightMode = false;
-            if ((features2 & 0x00100000) != 0) { nNightMode = '1'; }
-            if ((features2 & 0x00200000) != 0) { nNightMode = '2'; }
-            if (nNightMode == '1') { nightMode = true; }
-            else if ((nNightMode == '0') && (window.matchMedia)) { nightMode = window.matchMedia('(prefers-color-scheme: dark)').matches }
-            // Dark Bootswatch themes need Bootstrap dark mode so light-mode overrides do not break contrast.
-            if ((typeof MeshCentralTheme !== 'undefined') && MeshCentralTheme.isDarkBaseTheme(getstore('theme', 'default'))) { nightMode = true; }
-            if (nightMode) {
+            var cNightMode = getstore('nightMode', '0');
+            var isNight = (cNightMode == '1') || (cNightMode == '0' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isNight) {
+                nightMode = true;
                 document.documentElement.setAttribute('data-bs-theme', 'dark');
-                QC('body').add('night'); QS('body')['background-color'] = '#000';
+                QC('body').add('night');
+                try { QS('body')['background-color'] = '#141517'; } catch(e){}
             } else {
+                nightMode = false;
                 document.documentElement.setAttribute('data-bs-theme', 'light');
-                QC('body').remove('night'); QS('body')['background-color'] = '#d3d9d6';
+                QC('body').remove('night');
+                try { QS('body')['background-color'] = '#F8F9FA'; } catch(e){}
             }
+            try { updateNightModeIcon(); } catch(e){}
             return nightMode;
         }
 
@@ -13313,7 +13291,7 @@
                         if (xterm != null) { xterm.dispose(); }
                         xtermfit = new FitAddon.FitAddon();
                         xtermimage = new ImageAddon.ImageAddon();
-                        xterm = new Terminal({ allowProposedApi: true });
+                        xterm = new Terminal({ allowProposedApi: true, fontFamily: 'Consolas, "Courier New", Courier, monospace' });
                         if (xtermfit) { xterm.loadAddon(xtermfit); }
                         xterm.loadAddon(xtermimage);
                         xterm.open(Q('termarea3xdiv')); // termarea3x
@@ -15826,14 +15804,8 @@
             // Render the sections
             var x = '';
             for (var i in sections) {
-                if (sections[i].img == null) {
-                    x += '<div class=DevSt style=margin-bottom:3px;margin-left:16px><b>' + sections[i].name + '</b></div><div style=margin-bottom:10px;margin-left:16px>' + sections[i].html + '</div>';
-                } else {
-                    x += '<table style=width:100%><tr>';
-                    x += '<td style=width:64px;vertical-align:top><img src=images/details/' + sections[i].img + ' border=0 width=64 /></td>'; // height=12
-                    x += '<td><div class=DevSt style=margin-bottom:3px;margin-left:16px><b>' + sections[i].name + '</b></div><div style=margin-bottom:10px;margin-left:16px>' + sections[i].html + '</div></td>';
-                    x += '</tr></table>';
-                }
+                x += '<div class="DevSt" style="font-size:16px;font-weight:700;margin-top:18px;margin-bottom:8px;color:var(--text-1);border-bottom:1px solid var(--border);padding-bottom:6px"><b>' + sections[i].name + '</b></div>';
+                x += '<div style="margin-bottom:16px;width:100%">' + sections[i].html + '</div>';
             }
 
             if (x == '') {
@@ -23122,7 +23094,7 @@
             if ((xxcurrentView == 11) && (desktop != null) && (desktop.m.recordedData != null)) { deskRecordSession(); }
 
             // If we are trying to go to "My Users" and we are not a user manager, move to recordings
-            if (((x == 4) && (userinfo != null) && ((userinfo.siteadmin & 2) == 0)) || ((features & 4) != 0) && (userinfo != null) && (userinfo._id.split('/')[2][0] != '~')) { x = 52; }
+            // if (((x == 4) && (userinfo != null) && ((userinfo.siteadmin & 2) == 0)) || ((features & 4) != 0) && (userinfo != null) && (userinfo._id.split('/')[2][0] != '~')) { x = 52; }
 
             // Stop the list graph if active
             if (xxcurrentView == 17) deviceDetailsStatsClear();
@@ -24422,7 +24394,7 @@
         function printFlexDateTime(d) { if (printDate(new Date()) == printDate(d)) { return printTime(d); } else { return printDateTime(d); } }
 
         function addDetailItem(title, value, state, classNames = []) {
-            return `<div class="row mb-1"><div class="${classNames[0] || 'col-md-7'}">${nobreak(title)}</div><div class="${classNames[1] || 'col-md-5 text-end'}" ${state === true ? 'style=word-break:break-all' : ''}>${value}</div></div>`;
+            return `<div class="row mb-1 align-items-center"><div class="${classNames[0] || 'col-5 col-md-4'}">${nobreak(title)}</div><div class="${classNames[1] || 'col-7 col-md-8 text-end'}" style="word-break:break-all;overflow-wrap:anywhere;">${value}</div></div>`;
         }
 
         function format(format) { var args = Array.prototype.slice.call(arguments, 1); return format.replace(/{(\d+)}/g, function (match, number) { return typeof args[number] != 'undefined' ? EscapeHtml(args[number]) : match; }); };

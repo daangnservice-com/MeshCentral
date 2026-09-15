@@ -8,14 +8,15 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="noindex,nofollow">
     <link rel="manifest" href="{{{domainurl}}}manifest.json">
-    <link type="image/x-icon" href="{{{domainurl}}}favicon.ico" rel="shortcut icon" />
+    <link rel="icon" type="image/png" href="karrot-favicon.png?v=ratio2026" />
+    <link rel="shortcut icon" type="image/png" href="karrot-favicon.png?v=ratio2026" />
+    <link rel="apple-touch-icon" href="karrot-favicon.png?v=ratio2026" />
     <link keeplink=1 type="text/css" href="styles/style.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/ol.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/ol3-contextmenu.min.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/xterm.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/flatpickr.min.css" media="screen" rel="stylesheet" title="CSS">
     {{{customCSSTags}}}
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
     <script type="text/javascript" src="scripts/common-0.0.1{{{min}}}.js"></script>
     <script type="text/javascript" src="scripts/meshcentral{{{min}}}.js"></script>
     <script type="text/javascript" src="scripts/amt-0.2.0{{{min}}}.js"></script>
@@ -160,9 +161,7 @@
     <div id=container>
         <div id="notifiyBox" class="notifiyBox" style="display:none"></div>
         <div id=masthead class=noselect>
-            <div style="float:left">{{{titlehtml}}}</div>
-            <div class="title" onclick="go(1,event)">{{{title1}}}</div>
-            <div class="title2">{{{title2}}}</div>
+            <div style="float:left; cursor:pointer;" onclick="go(1,event)"><img src="images/daangn_logo.png" alt="당근서비스" style="height:32px; width:auto; object-fit:contain;" /></div>
             <div style="float:right">
                 <div id=notificationCount onclick="clickNotificationIcon()" class="unselectable" style="display: none;" title="Click to view current notifications">0</div>
             </div>
@@ -2270,8 +2269,8 @@
             if ((features2 & 0x00100000) != 0) { nNightMode = '1'; }
             if ((features2 & 0x00200000) != 0) { nNightMode = '2'; }
             if (nNightMode == '1') { nightMode = true; }
-            else if ((nNightMode == '0') && (window.matchMedia)) { nightMode = window.matchMedia('(prefers-color-scheme: dark)').matches }
-            if (nightMode) { QC('body').add('night'); QS('body')['background-color'] = '#000'; } else { QC('body').remove('night'); QS('body')['background-color'] = '#d3d9d6'; }
+            else { nightMode = false; }
+            if (nightMode) { QC('body').add('night'); QS('body')['background-color'] = ''; } else { QC('body').remove('night'); QS('body')['background-color'] = ''; }
             return nightMode;
         }
 

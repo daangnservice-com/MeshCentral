@@ -1,0 +1,1312 @@
+/* ==========================================================
+   당근 SEED Design System — MeshCentral Custom Theme v15.0
+   ┌ 핵심 수정 ──────────────────────────────────────────────
+   │ ① grid-template-columns: 176px auto (absolute 포지셔닝 버그 제거)
+   │ ② #topbar 투명화 → 검은 바 제거
+   │ ③ 다크 모드 색상 통일 (sidebar = header = 배경 계층 구조)
+   │ ④ 버튼 색상 전면 교정
+   └─────────────────────────────────────────────────────── */
+
+/* ── 0. 폰트 ── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* ── 1. 디자인 토큰 ── */
+:root {
+  --seed-orange:        #FF6F0F;
+  --seed-orange-hover:  #E55F00;
+  --seed-orange-light:  #FFF3EB;
+  --seed-orange-alpha:  rgba(255, 111, 15, 0.18);
+
+  /* Light mode */
+  --bg-body:     #F2F4F6;
+  --bg-sidebar:  #FFFFFF;
+  --bg-header:   #FFFFFF;
+  --bg-content:  #F2F4F6;
+  --bg-surface:  #FFFFFF;
+  --border:      #E5E8EB;
+  --text-1:      #191F28;
+  --text-2:      #4E5968;
+  --text-3:      #8B95A1;
+  --input-bg:    #FFFFFF;
+  --row-hover:   #FFF3EB;
+}
+
+body.night {
+  /* Dark mode — 전체 통일된 회색 */
+  --bg-body:     #1C1E22;   /* 콘텐츠 배경: 사이드바와 동일 */
+  --bg-sidebar:  #1C1E22;   /* 사이드바 */
+  --bg-header:   #1C1E22;   /* 헤더 */
+  --bg-content:  #1C1E22;   /* 메인 콘텐츠 */
+  --bg-surface:  #26292F;   /* 카드/패널: 살짝 밝음 */
+  --border:      #2E3238;
+  --text-1:      #EBEBED;
+  --text-2:      #AFB8C2;
+  --text-3:      #6B7480;
+  --input-bg:    #1C1E22;
+  --row-hover:   #2E3238;
+}
+
+/* ── 2. 전역 폰트 · 기본값 ── */
+*, body, html {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  background-color: var(--bg-body) !important;
+  color: var(--text-1) !important;
+}
+
+/* ── 3. 컨테이너 배경 통일 ── */
+/* 원본 style.css: .night #container { background: #000 } 오버라이드 */
+#container {
+  background: var(--bg-body) !important;
+}
+
+body.night #container {
+  background: var(--bg-body) !important;
+  color: var(--text-1) !important;
+}
+
+/* ── 4. 헤더 ── */
+#masthead,
+.masthead-container {
+  height: 52px !important;
+  min-height: 52px !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  background: var(--bg-header) !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+  z-index: 200 !important;
+  position: relative !important;
+}
+
+#masthead img {
+  height: 26px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+/* ── 4. 레이아웃: CSS Grid 수정 ─────────────────────────────
+   원본: grid-template-columns: 90px auto
+   수정: grid-template-columns: 176px auto
+   이렇게 해야 사이드바가 올바른 너비로 그리드에 배치됨.
+   margin-left 방식은 쓰지 않음 (90px grid + 176px margin = 266px 버그)
+────────────────────────────────────────────────────────── */
+.fullscreen #container {
+  grid-template-columns: 176px auto !important;
+  grid-template-rows: 52px minmax(0, auto) 1fr 40px !important;
+}
+
+/* 사이드바: grid-area: sidebar 그대로 활용, position absolute 제거 */
+#page_leftbar,
+.sidebar {
+  width: auto !important;           /* 그리드 컬럼 너비(176px) 그대로 사용 */
+  min-width: 0 !important;
+  position: relative !important;    /* static/relative — 절대위치 제거 */
+  top: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  height: auto !important;
+  padding: 14px 10px !important;
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border) !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: auto !important;
+}
+
+/* 사이드바 링크 */
+#page_leftbar .nav-link,
+#page_leftbar a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 9px 11px !important;
+  border-radius: 8px !important;
+  color: var(--text-2) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  margin-bottom: 2px !important;
+  transition: background 0.12s, color 0.12s !important;
+  white-space: nowrap !important;
+}
+
+#page_leftbar .nav-link i,
+#page_leftbar a i {
+  font-size: 14px !important;
+  width: 16px !important;
+  text-align: center !important;
+  flex-shrink: 0 !important;
+  color: var(--text-3) !important;
+}
+
+#page_leftbar .nav-link:hover,
+#page_leftbar a:hover,
+#page_leftbar .nav-link.active,
+#page_leftbar .lbbuttonsel,
+#page_leftbar a.active {
+  background: var(--seed-orange-light) !important;
+  color: var(--seed-orange) !important;
+}
+
+body.night #page_leftbar .nav-link:hover,
+body.night #page_leftbar a:hover,
+body.night #page_leftbar .nav-link.active,
+body.night #page_leftbar .lbbuttonsel,
+body.night #page_leftbar a.active {
+  background: rgba(255,111,15,0.13) !important;
+}
+
+#page_leftbar .nav-link:hover i,
+#page_leftbar a:hover i,
+#page_leftbar .nav-link.active i,
+#page_leftbar .lbbuttonsel i,
+#page_leftbar a.active i {
+  color: var(--seed-orange) !important;
+}
+
+#page_leftbar .nav-link:hover span,
+#page_leftbar a:hover span,
+#page_leftbar .nav-link.active span,
+#page_leftbar .lbbuttonsel span,
+#page_leftbar a.active span {
+  color: var(--seed-orange) !important;
+  font-weight: 700 !important;
+}
+
+/* ── 5. 탑바 ─────────────────────────────────────────────
+   MainMenuSpan: 사이드바가 메인이므로 숨김
+   서브메뉴(Events/Users/Server): 투명 배경 유지
+   → 내 파일 같은 페이지에서 검은 바가 보이지 않도록
+────────────────────────────────────────────────────────── */
+#MainMenuSpan {
+  display: none !important;
+}
+
+#topbar {
+  /* 마진 제거 — 그리드가 위치를 담당 */
+  margin-left: 0 !important;
+  width: 100% !important;
+  /* 투명 배경: 서브메뉴 없을 때 검은 바 안 보이게 */
+  background: transparent !important;
+  border-bottom: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 서브메뉴 스팬들 배경도 투명 */
+#EventsSubMenuSpan,
+#UserSubMenuSpan,
+#UsersSubMenuSpan,
+#ServerSubMenuSpan,
+#MainSubMenuSpan,
+#MeshSubMenuSpan,
+#PluginSubMenuSpan {
+  background: transparent !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+/* 서브메뉴 테이블 */
+#EventsSubMenu,
+#UserSubMenu,
+#UsersSubMenu,
+#ServerSubMenu,
+#MainSubMenu,
+#MeshSubMenu {
+  height: auto !important;
+  background: var(--bg-sidebar) !important;
+  border-bottom: 1px solid var(--border) !important;
+  width: 100% !important;
+}
+
+/* 탑바 탭 셀 */
+.topbar_td {
+  padding: 9px 18px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: var(--text-2) !important;
+  cursor: pointer !important;
+  border-bottom: 2px solid transparent !important;
+  transition: color 0.12s, border-color 0.12s !important;
+  white-space: nowrap !important;
+  background: transparent !important;
+  vertical-align: middle !important;
+}
+
+.topbar_td:hover {
+  color: var(--seed-orange) !important;
+  background: transparent !important;
+}
+
+.topbar_td_end {
+  background: transparent !important;
+}
+
+/* ── 6. 메인 콘텐츠 영역 ── */
+#column_l {
+  /* 마진 제거 — 그리드가 위치를 담당 */
+  margin-left: 0 !important;
+  width: 100% !important;
+  padding: 22px 24px !important;
+  background: var(--bg-content) !important;
+  box-sizing: border-box !important;
+  color: var(--text-1) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  position: relative !important;
+}
+
+/* ── 7. 페이지 타이틀 ── */
+.fs-4.fw-bold,
+#p1title .fs-4,
+#p2title .fs-4,
+#p3title .fs-4,
+#p4title .fs-4,
+#p5title .fs-4,
+#p6title .fs-4 {
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  color: var(--text-1) !important;
+  letter-spacing: -0.3px !important;
+  margin-bottom: 16px !important;
+}
+
+/* ── 7b. 이벤트로그 날짜 헤더 그라디언트 제거 ── */
+/* MeshCentral이 날짜 헤더 행에 인라인 gradient를 주입함 → 통일된 배경으로 */
+body.night [style*="linear-gradient"],
+body.night [style*="background: linear"],
+body.night [style*="background:linear"] {
+  background: var(--bg-surface) !important;
+}
+
+/* 이벤트 로그 날짜 구분 헤더 */
+body.night .xeventdateheader,
+body.night tr[style*="gradient"] td,
+body.night td[style*="gradient"] {
+  background: var(--bg-surface) !important;
+  background-image: none !important;
+}
+
+/* ── 8. 카드 & 패널 ── */
+.card,
+.panel,
+.modern-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07) !important;
+  color: var(--text-1) !important;
+}
+
+/* ── 9. 버튼 ─────────────────────────────────────────────
+   모든 버튼의 기본 외형 (높이, 폰트, 반경)
+────────────────────────────────────────────────────────── */
+.btn,
+input[type="button"],
+input[type="submit"],
+button:not(.btn-close):not(.mobile-submenu-arrow) {
+  height: 34px !important;
+  min-height: 34px !important;
+  line-height: 32px !important;
+  padding: 0 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+/* ─ 9a. 다크모드 기본 버튼 (클래스 없는 input[type=button] 포함) */
+body.night input[type="button"],
+body.night input[type="submit"],
+body.night button:not(.btn-close):not(.mobile-submenu-arrow) {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+}
+
+/* ─ 9b. 라이트모드 기본 버튼 */
+body:not(.night) input[type="button"],
+body:not(.night) input[type="submit"],
+body:not(.night) button:not(.btn-close):not(.mobile-submenu-arrow):not(.btn-primary):not(.btn-secondary):not(.btn-light):not(.btn-success):not(.btn-info) {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+}
+
+/* ─ 9c. Primary (오렌지) 버튼 */
+.btn-primary,
+.btn-info,
+.btn-success,
+#GroupActionButton,
+#UsersGroupActionButton,
+#UsersGroupsGroupActionButton,
+input[value="작업"],
+input[value="Actions"],
+input[value="연결"],
+input[value="Connect"],
+input[value="보내기"],
+input[value="Send"],
+input[value="사용자 추가"],
+input[value="+ Add User"],
+input[value="에이전트 추가"],
+input[value="Add Agent"],
+input[value="새 계정..."],
+input[value="공지 방송"],
+input[value="새 그룹 생성"],
+input[value="Add Device Group"] {
+  background: var(--seed-orange) !important;
+  border: 1px solid var(--seed-orange) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(255,111,15,0.22) !important;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-info:hover:not(:disabled),
+.btn-success:hover:not(:disabled),
+#GroupActionButton:hover,
+input[value="작업"]:hover,
+input[value="연결"]:hover,
+input[value="사용자 추가"]:hover,
+input[value="공지 방송"]:hover {
+  background: var(--seed-orange-hover) !important;
+  border-color: var(--seed-orange-hover) !important;
+}
+
+.btn-primary:disabled {
+  background: #FFB380 !important;
+  border-color: #FFB380 !important;
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* ─ 9d. Secondary (테두리) 버튼 */
+.btn-secondary,
+.btn-light,
+.btn-outline-secondary,
+#SelectAllButton,
+#ScrollToTopButton,
+#UsersSelectAllButton,
+input[value="전체 선택"],
+input[value="Select All"],
+input[value="맨 위로"],
+input[value="Scroll To Top"],
+input[value="상위"],
+input[value="Up"],
+input[value="이름 변경"],
+input[value="Rename"],
+input[value="삭제"],
+input[value="Delete"],
+input[value="편집"],
+input[value="Edit"],
+input[value="새 폴더"],
+input[value="New Folder"],
+input[value="업로드"],
+input[value="Upload"],
+input[value="다운로드"],
+input[value="Download"],
+input[value="새로고침"],
+input[value="Refresh"],
+input[value="잘라내기"],
+input[value="Cut"],
+input[value="복사"],
+input[value="Copy"],
+input[value="붙여넣기"],
+input[value="Paste"],
+input[value="압축"],
+input[value="Zip"],
+input[value="압축 해제"],
+input[value="Unzip"],
+input[value="찾기"],
+input[value="Find"],
+input[value="그룹 작업"] {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary:hover:not(:disabled),
+.btn-light:hover:not(:disabled),
+.btn-outline-secondary:hover:not(:disabled),
+#SelectAllButton:hover,
+#ScrollToTopButton:hover,
+input[value="전체 선택"]:hover,
+input[value="상위"]:hover,
+input[value="이름 변경"]:hover,
+input[value="삭제"]:hover,
+input[value="편집"]:hover,
+input[value="새 폴더"]:hover,
+input[value="업로드"]:hover,
+input[value="다운로드"]:hover,
+input[value="새로고침"]:hover,
+input[value="잘라내기"]:hover,
+input[value="복사"]:hover,
+input[value="붙여넣기"]:hover,
+input[value="그룹 작업"]:hover {
+  background: var(--seed-orange-light) !important;
+  border-color: var(--seed-orange) !important;
+  color: var(--seed-orange) !important;
+}
+
+body.night .btn-secondary:hover,
+body.night .btn-light:hover,
+body.night input[value="전체 선택"]:hover,
+body.night input[value="상위"]:hover,
+body.night input[value="이름 변경"]:hover,
+body.night input[value="삭제"]:hover,
+body.night input[value="새 폴더"]:hover,
+body.night input[value="업로드"]:hover,
+body.night input[value="다운로드"]:hover,
+body.night input[value="잘라내기"]:hover,
+body.night input[value="복사"]:hover,
+body.night input[value="붙여넣기"]:hover {
+  background: rgba(255,111,15,0.12) !important;
+  border-color: var(--seed-orange) !important;
+  color: var(--seed-orange) !important;
+}
+
+/* ── 10. 입력 필드 ── */
+input[type="text"]:not(#username):not(#password),
+input[type="search"],
+input[type="email"],
+input[type="number"],
+select,
+.form-select,
+.form-control,
+textarea {
+  height: 34px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--input-bg) !important;
+  color: var(--text-1) !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.12s, box-shadow 0.12s !important;
+}
+
+textarea { height: auto !important; padding: 8px 12px !important; }
+
+input[type="text"]:focus:not(#username):not(#password),
+input[type="search"]:focus,
+select:focus,
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--seed-orange) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--seed-orange-alpha) !important;
+}
+
+/* ── 10b. 서버 콘솔 터미널 영역 ── */
+/* 콘솔 탭의 검은 terminal 영역 → 통일된 회색으로 */
+#p6consolex,
+#p6console,
+#svrconsole,
+.consolex,
+[id*="console"] textarea,
+[id*="console"] pre,
+[id*="console"] iframe {
+  background: #161820 !important;  /* 터미널은 살짝 어두운 회색 (가독성) */
+  color: #B8C0CC !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+}
+
+/* ── 10c. 디바이스 행 오른쪽 검은 패널 제거 ── */
+/* MeshCentral 디바이스 리스트의 우측 디테일 패널 */
+body.night div[style*="background-color:#000"],
+body.night div[style*="background-color: #000"],
+body.night div[style*="background-color:rgb(0"],
+body.night td[style*="background-color:#000"],
+body.night td[style*="background-color: #000"] {
+  background-color: var(--bg-content) !important;
+}
+
+/* ── 11. 푸터 ── */
+#footer {
+  margin-left: 0 !important;   /* 그리드가 위치 담당 */
+  width: 100% !important;
+  background: var(--bg-sidebar) !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 8px 20px !important;
+  box-sizing: border-box !important;
+}
+
+#footer td,
+#footer th,
+#footer tr {
+  color: var(--text-3) !important;
+  background: transparent !important;
+  padding: 4px 8px !important;
+  border: none !important;
+  font-size: 12px !important;
+}
+
+#footer a { color: var(--text-3) !important; text-decoration: none !important; }
+#footer a:hover { color: var(--seed-orange) !important; }
+
+/* ── 12. 로그인 페이지 ── */
+#backgroundImage { display: none !important; }
+
+body.login #centralTable,
+table.container {
+  height: 100vh !important;
+  margin: 0 auto !important;
+  border: none !important;
+  background: #F2F4F6 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 60px !important;
+}
+
+/* 로그인 페이지: 캐릭터 이미지 영역 표시 */
+#welcomeimage {
+  display: table-cell !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  width: 320px !important;
+}
+
+#welcomeimage img,
+#welcomeimage picture img {
+  width: 260px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 20px !important;
+  display: block !important;
+}
+
+#logincell {
+  text-align: center !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#logincell > div[style*="font-size:46px"],
+#loginPicture { display: none !important; }
+
+#loginpanel,
+#createpanel,
+#resetpanel,
+#tokenpanel,
+#resettokenpanel,
+#resetpasswordpanel,
+#checkemailpanel,
+#waitpushpanel {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.09) !important;
+  border: 1px solid #EAECEF !important;
+  padding: 36px 30px 28px !important;
+  color: #191F28 !important;
+  width: 360px !important;
+  max-width: 90vw !important;
+  text-align: left !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+#loginuserpassdiv,
+#loginpanelform,
+#loginpanelform table,
+#loginpanelform tr,
+#loginpanelform td,
+#loginpanelform div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#loginpanel b, #createpanel b, #resetpanel b {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #191F28 !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+#username,
+#password {
+  width: 100% !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  border: 1.5px solid #E5E8EB !important;
+  border-radius: 10px !important;
+  color: #191F28 !important;
+  background: #FFFFFF !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+  margin-bottom: 12px !important;
+  outline: none !important;
+  transition: border-color 0.12s, box-shadow 0.12s !important;
+  box-shadow: none !important;
+}
+
+#username:hover, #password:hover { border-color: #FF6F0F !important; }
+#username:focus { border-color: #FF6F0F !important; box-shadow: 0 0 0 3px rgba(255,111,15,0.18) !important; }
+#password:focus { border-color: #FF6F0F !important; box-shadow: 0 0 0 3px rgba(255,111,15,0.18) !important; }
+
+#loginButton,
+#createButton,
+#resetButton,
+body.login input[type="submit"] {
+  background: #FF6F0F !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  height: 46px !important;
+  line-height: 46px !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  margin-top: 6px !important;
+  box-shadow: 0 4px 14px rgba(255,111,15,0.25) !important;
+  display: block !important;
+  transition: background 0.12s !important;
+}
+
+#loginButton:hover, #createButton:hover, #resetButton:hover,
+body.login input[type="submit"]:hover { background: #E55F00 !important; }
+
+#flink, #flink a { color: #8B95A1 !important; font-size: 12px !important; text-decoration: none !important; }
+#flink a:hover { color: #FF6F0F !important; }
+
+/* ── 13. 계정 설정 (내 계정) 완전 숨김 ── */
+#p2,
+#LeftMenuMyAccount,
+#MainMenuMyAccount,
+.userDropdownMenuItem[data-action="account"] {
+  display: none !important;
+}
+
+#p2info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  max-width: 700px !important;
+}
+
+/* 프로필 이미지 + 사진변경 버튼: 완전 숨김 */
+#p2AccountImageFrame {
+  display: none !important;
+}
+
+/* 설정 섹션 카드 */
+#p2AccountActions,
+#p2AccountSecurity {
+  background: var(--bg-surface) !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+  border: 1px solid var(--border) !important;
+}
+
+#p2AccountActions a,
+#p2AccountSecurity a {
+  color: var(--text-1) !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+#p2AccountActions a:hover,
+#p2AccountSecurity a:hover {
+  background: var(--seed-orange-light) !important;
+  color: var(--seed-orange) !important;
+}
+
+body.night #p2AccountActions a:hover,
+body.night #p2AccountSecurity a:hover {
+  background: rgba(255,111,15,0.12) !important;
+  color: var(--seed-orange) !important;
+}
+
+/* ── 14. 다크모드 Bootstrap 오버라이드 ── */
+body.night .bg-white,
+body.night .bg-light { background: var(--bg-surface) !important; }
+
+body.night .card,
+body.night .card-body,
+body.night .card-header,
+body.night .card-footer {
+  background: var(--bg-surface) !important;
+  color: var(--text-1) !important;
+  border-color: var(--border) !important;
+}
+
+body.night .modal-content {
+  background: var(--bg-surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-1) !important;
+}
+
+body.night .modal-header {
+  border-color: var(--border) !important;
+}
+
+body.night input[type="text"]:not(#username):not(#password),
+body.night input[type="search"],
+body.night select,
+body.night .form-select,
+body.night .form-control,
+body.night textarea {
+  background: var(--input-bg) !important;
+  border-color: var(--border) !important;
+  color: var(--text-1) !important;
+}
+
+/* ── 15. 사용자 드롭다운 ── */
+.userDropdownMenu,
+#userDropdownMenu {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18) !important;
+}
+
+.userDropdownMenuItem {
+  color: var(--text-1) !important;
+  border-radius: 8px !important;
+}
+
+.userDropdownMenuItem:hover {
+  background: var(--seed-orange-light) !important;
+  color: var(--seed-orange) !important;
+}
+
+body.night .userDropdownMenuItem:hover {
+  background: rgba(255,111,15,0.12) !important;
+}
+
+.userDropdownMenuIcon { color: var(--text-3) !important; }
+.userDropdownMenuItem:hover .userDropdownMenuIcon { color: var(--seed-orange) !important; }
+
+#userDropdownMenuDivider {
+  background: var(--border) !important;
+  height: 1px !important;
+  margin: 4px 8px !important;
+}
+
+/* ── 16. 스플리터 (검은 구분선) 제거 ── */
+.col-resize,
+.rs-splitter,
+.splitter,
+div[style*="background-color: black"],
+div[style*="background-color:black"],
+div[style*="background: black"],
+div[style*="background:black"] {
+  background: var(--border) !important;
+  width: 2px !important;
+  opacity: 0.5 !important;
+}
+
+/* ── 17. 스크롤바 ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* ── 18. 기타 inline style 배경 오버라이드 ── */
+/* MeshCentral이 style=""로 배경색 주입하는 요소 처리 */
+body.night div[style*="background-color: #808080"],
+body.night div[style*="background-color:#808080"],
+body.night table[style*="background-color: #808080"],
+body.night table[style*="background-color:#808080"] {
+  background-color: var(--bg-sidebar) !important;
+  color: var(--text-1) !important;
+}
+
+
+/* ── 19. 팔업(Dialog) 스타일 ─────────────────────────────────── */
+#dialog {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55) !important;
+  color: var(--text-1) !important;
+  width: 500px !important;
+  left: calc(50% - 250px) !important;
+  top: calc(50% - 200px) !important;
+  font-family: var(--seed-font) !important;
+}
+
+/* 팔업 헤더: 네이비 파란색 → SEED 오렌지 */
+#dialogHeader {
+  background: linear-gradient(135deg, #FF6F0F 0%, #D95500 100%) !important;
+  border-radius: 14px 14px 0 0 !important;
+  padding: 14px 18px !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+#id_dialogtitle {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  letter-spacing: -0.2px !important;
+  padding: 0 !important;
+}
+
+#id_dialogclose {
+  background: rgba(255,255,255,0.18) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  cursor: pointer !important;
+  float: none !important;
+  padding: 4px 10px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  transition: background 0.12s !important;
+  margin: 0 !important;
+}
+
+#id_dialogclose:hover {
+  background: rgba(255,255,255,0.3) !important;
+}
+
+#dialogBody {
+  padding: 18px 20px !important;
+  color: var(--text-1) !important;
+  background: var(--bg-surface) !important;
+}
+
+.dialogText {
+  color: var(--text-1) !important;
+  line-height: 1.6 !important;
+}
+
+/* 팔업 하단 버튼 영역 */
+#idx_dlgButtonBar {
+  padding: 12px 18px !important;
+  border-top: 1px solid var(--border) !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: var(--bg-surface) !important;
+  border-radius: 0 0 14px 14px !important;
+}
+
+/* Cancel 버튼 */
+#idx_dlgCancelButton {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-2) !important;
+  font-weight: 600 !important;
+}
+
+#idx_dlgCancelButton:hover {
+  border-color: var(--seed-orange) !important;
+  color: var(--seed-orange) !important;
+  background: rgba(255,111,15,0.08) !important;
+}
+
+/* OK 버튼: 오렌지 */
+#idx_dlgOkButton {
+  background: var(--seed-orange) !important;
+  border: 1px solid var(--seed-orange) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+#idx_dlgOkButton:hover:not(:disabled) {
+  background: var(--seed-orange-hover) !important;
+  border-color: var(--seed-orange-hover) !important;
+}
+
+#idx_dlgOkButton:disabled,
+#idx_dlgOkButton[disabled] {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-3) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* 삭제 버튼 (이름으로 타겟팅) */
+#dialog input[value="삭제"],
+#dialog input[value="Delete"] {
+  background: transparent !important;
+  border: 1px solid #DC3545 !important;
+  color: #DC3545 !important;
+}
+
+#dialog input[value="삭제"]:hover,
+#dialog input[value="Delete"]:hover {
+  background: rgba(220,53,69,0.1) !important;
+}
+
+/* 팔업 내 링크: 파란색 → 오렌지 */
+#dialog a,
+#dialogBody a {
+  color: var(--seed-orange) !important;
+}
+
+#dialog a:hover,
+#dialogBody a:hover {
+  color: var(--seed-orange-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* ── 20. Bootstrap floating label 높이 수정 ── */
+/* 우리 CSS의 height:34px가 floating label과 충돌 → 제외 */
+.form-floating > .form-control,
+.form-floating > .form-select {
+  height: 56px !important;
+  min-height: 56px !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 0.4rem !important;
+  padding-left: 12px !important;
+  line-height: 1.2 !important;
+}
+
+.form-floating > textarea.form-control {
+  height: auto !important;
+  min-height: 80px !important;
+  padding-top: 1.6rem !important;
+}
+
+.form-floating > label {
+  padding: 0.85rem 12px !important;
+  color: var(--text-3) !important;
+  font-size: 13px !important;
+}
+
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-select ~ label {
+  opacity: 0.75 !important;
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  color: var(--seed-orange) !important;
+}
+
+/* ── 21. 다크모드 링크 통일 ── */
+body.night a:not([class]):not([onclick]) {
+  color: var(--seed-orange) !important;
+}
+
+body.night a:not([class]):not([onclick]):hover {
+  color: var(--seed-orange-hover) !important;
+}
+
+/* ── 22. 그라디언트 강제 제거 (최고 우선순위) ── */
+/* CSS만으론 안돼는 inline gradient → background-image: none으로 제거 */
+body.night *:not(#d2canvas):not(canvas)[style*="gradient"] {
+  background-image: none !important;
+  background-color: var(--bg-surface) !important;
+}
+
+body.night *:not(#d2canvas):not(canvas)[style*="linear-gradient"] {
+  background-image: none !important;
+  background-color: var(--bg-surface) !important;
+}
+
+/* ── 23. g1/g2, g1s/g2s 등 모든 그라데이션 바 및 호버 검은색 완벽 방지 ── */
+.g1, .g2, .g1t, .g2t, .g1s, .g2s,
+.night .g1, .night .g2, .night .g1t, .night .g2t, .night .g1s, .night .g2s,
+td.g1, td.g2, td.g1t, td.g2t, td.g1s, td.g2s,
+div.g1, div.g2, div.g1t, div.g2t, div.g1s, div.g2s,
+*:hover > .g1s, *:hover > .g2s, *:hover .g1s, *:hover .g2s,
+.baricon, .night .baricon {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* e2/style10/행 호버 스타일 통일 */
+.night .e2, .night .e2t, .night .e2s,
+.night .style10, .night .style10s,
+.night .style6, .night .style14,
+.night .bar, .night .sbar, .night .bar18,
+.style10, .style10s, .e2s {
+  background-image: none !important;
+  color: var(--text-1) !important;
+}
+
+/* 이벤트 로그 행 마우스 호버 배경 통일 */
+.p3eventsTable tr:hover,
+#p3events tr:hover,
+#p16events tr:hover,
+#p31events tr:hover,
+.night tr:hover .style10,
+.night tr:hover .style10s {
+  background-color: var(--bg-hover, rgba(255, 255, 255, 0.05)) !important;
+}
+
+.p3eventsTable tr:hover td,
+#p3events tr:hover td,
+#p16events tr:hover td,
+#p31events tr:hover td {
+  background-color: transparent !important;
+}
+
+/* ── 24. 상단 툴바(Toolbar Container System) — 파일 관리 기준 디자인 완벽 통일 ── */
+#devListToolbarSpan,
+#p5toolbar,
+#p4toolbarActions,
+#p3 .pTable,
+#p9toolbar,
+#p13toolbar,
+#p18toolbar,
+.night #devListToolbarSpan,
+.night #p5filehead,
+.night #p5filesubhead,
+.night #p4toolbarActions,
+.night .style14,
+.night .auto-style1 {
+  background-color: var(--bg-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  margin-bottom: 14px !important;
+  color: var(--text-1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+/* 파일 관리 툴바 내부 정돈 */
+#p5toolbar {
+  display: table !important;
+  width: 100% !important;
+  padding: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+#p5filehead {
+  background-color: var(--bg-surface) !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+#p5filesubhead {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 6px 12px !important;
+  border-radius: 0 0 10px 10px !important;
+}
+
+/* 이벤트 로그 툴바 정돈 */
+#p3 .pTable {
+  display: block !important;
+  width: 100% !important;
+  padding: 8px 12px !important;
+}
+
+#p3 .pTable tr, #p3 .pTable td {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* 툴바 내 버튼 디자인 통일 (파일 관리 기준) */
+#devListToolbarSpan input[type="button"],
+#devListToolbarSpan button,
+#p5toolbar input[type="button"],
+#p5toolbar button,
+#p4toolbarActions input[type="button"],
+#p4toolbarActions button,
+#p3 .pTable input[type="button"],
+#p3 .pTable button,
+.night #devListToolbarSpan input[type="button"],
+.night #p5toolbar input[type="button"],
+.night #p4toolbarActions input[type="button"] {
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  line-height: 30px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease !important;
+}
+
+/* 툴바 내 Primary (주황색) 버튼 통일 */
+#GroupActionButton,
+#UsersGroupActionButton,
+.btn-primary:not(:disabled) {
+  background: var(--seed-orange) !important;
+  border: 1px solid var(--seed-orange) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+/* 툴바 내 Secondary (보조) 버튼 통일 */
+.btn-secondary:not(:disabled),
+#SelectAllButton:not(:disabled),
+#ScrollToTopButton:not(:disabled),
+#UsersSelectAllButton:not(:disabled),
+#p5FolderUp:not(:disabled),
+#p5SelectAllButton:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-1) !important;
+  box-shadow: none !important;
+}
+
+/* 툴바 내 Disabled 버튼 통일 */
+#devListToolbarSpan input:disabled,
+#devListToolbarSpan button:disabled,
+#p5toolbar input:disabled,
+#p5toolbar button:disabled,
+#p4toolbarActions input:disabled,
+#p4toolbarActions button:disabled {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+/* 툴바 내 Input / Select 필드 디자인 통일 */
+#devListToolbarSpan input[type="text"],
+#devListToolbarSpan select,
+#p5toolbar select,
+#p4toolbarActions input[type="search"],
+#p4toolbarActions select,
+#p3 .pTable select {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+  color: var(--text-1) !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  padding: 0 10px !important;
+}
+
+/* ── 25. 내 디바이스 > 상세 정보(Details) 오른쪽 쏠림/잘림 방지 및 아이콘 제거 ── */
+#p17info {
+  padding-left: 12px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+#p17info img {
+  display: none !important;
+}
+
+#p17info2 {
+  padding-right: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#p17info2 table {
+  table-layout: fixed !important;
+  width: 100% !important;
+}
+
+#p17info2 .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+#p17info2 .text-end {
+  text-align: right !important;
+  word-break: break-all !important;
+  overflow-wrap: anywhere !important;
+  padding-right: 4px !important;
+}
+
+/* ── 26. 디버그 전용 AutoConnect 및 미작동 Power Actions 버튼 숨김 ── */
+#autoconnectbutton1,
+#autoconnectbutton2,
+#p9AutoConnect,
+#p13AutoConnect,
+[id*="autoconnect"],
+[id*="AutoConnect"],
+input[value*="AutoConnect"],
+input[value*="Power Actions"],
+input[onclick*="showPowerActionDlg()"] {
+  display: none !important;
+}
+
+/* ── 27. 터미널(xterm / Console) 고정폭(Monospace) 폰트 복구 ── */
+.xterm,
+.xterm *,
+.xterm-rows,
+.xterm-rows *,
+.xterm-screen,
+.xterm-screen *,
+.xterm-helper-textarea,
+.xterm-char-measure-element,
+#terminal,
+#terminal *,
+#termarea3x,
+#termarea3x *,
+#termarea3xdiv,
+#termarea3xdiv *,
+#p9terminal,
+#p9terminal *,
+#p13terminal,
+#p13terminal *,
+#svrconsole,
+#svrconsole *,
+pre,
+code,
+kbd,
+samp,
+.terminal-canvas,
+[id*="terminal"],
+[id*="terminal"] * {
+  font-family: 'Consolas', 'Courier New', 'Liberation Mono', 'Menlo', 'Monaco', 'Lucida Console', monospace !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* ── 28. 상단 오른쪽 로그인 섹션 프로필 이미지 제거 ── */
+#userDropdownImage {
+  display: none !important;
+}
+
+
+
+
+
